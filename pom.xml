@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>yt.test</groupId>
-  <artifactId>hello.test</artifactId>
+  <artifactId>hk-rabbitmq</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>hello.test</name>
+  <name>hk-rabbitmq</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -20,10 +20,19 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.rabbitmq</groupId>
+      <artifactId>amqp-client</artifactId>
+      <version>5.5.0</version>
     </dependency>
   </dependencies>
 
