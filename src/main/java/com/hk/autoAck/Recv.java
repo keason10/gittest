@@ -12,6 +12,7 @@ public class Recv {
       final Channel channel = new BaseRabbitMq().init();
       channel.queueDeclare(QUEUE_NAME, false, false, false, null);
       System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+      channel.basicQos(1);
       Consumer consumer = new DefaultConsumer(channel) {
           @Override
           public void handleDelivery(String consumerTag, Envelope envelope,
@@ -19,7 +20,7 @@ public class Recv {
                   throws IOException {
               String message = new String(body, "UTF-8");
               try {
-                  Thread.sleep(5000);
+                  Thread.sleep(2000);
               } catch (InterruptedException e) {
                   e.printStackTrace();
               }

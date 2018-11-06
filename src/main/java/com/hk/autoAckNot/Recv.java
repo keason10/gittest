@@ -22,7 +22,7 @@ public class Recv {
                   throws IOException {
               String message = new String(body, "UTF-8");
               try {
-                  Thread.sleep(5000);
+                  Thread.sleep(2000);
               } catch (InterruptedException e) {
                   e.printStackTrace();
               }
