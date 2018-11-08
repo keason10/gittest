@@ -16,11 +16,13 @@ public class EmitLogDirect {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
+        //exchange 设置方式为 direct
         channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
 
         String severity = getSeverity(argv);
         String message = getMessage(argv);
 
+        //routing-key 设置为单个单词 severity
         channel.basicPublish(EXCHANGE_NAME, severity, null, message.getBytes("UTF-8"));
         System.out.println(" [x] Sent '" + severity + "':'" + message + "'");
 

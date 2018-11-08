@@ -14,7 +14,10 @@ public class ReceiveLogsDirect {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
+        //exchange 设置方式为 direct
         channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
+
+        //获取随机队列名称
         String queueName = channel.queueDeclare().getQueue();
 
         if (argv.length < 1) {
@@ -22,6 +25,7 @@ public class ReceiveLogsDirect {
             System.exit(1);
         }
 
+        //channel 绑定队列名 和 多个单词类型的routing-key
         for (String severity : argv) {
             channel.queueBind(queueName, EXCHANGE_NAME, severity);
         }
