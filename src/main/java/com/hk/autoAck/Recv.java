@@ -9,7 +9,7 @@ public class Recv {
   private final static String QUEUE_NAME = "hello";
 
   public static void receive() throws Exception{
-      final Channel channel = new BaseRabbitMq().init();
+      final Channel channel = new BaseRabbitMq().getChannelInstance();
       channel.queueDeclare(QUEUE_NAME, false, false, false, null);
       System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
       channel.basicQos(1);

@@ -1,5 +1,6 @@
 package com.hk.Topics;
 
+import com.hk.BaseRabbitMq;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
@@ -9,10 +10,7 @@ public class ReceiveLogsTopic {
   private static final String EXCHANGE_NAME = "topic_logs";
 
   public static void main(String[] argv) throws Exception {
-    ConnectionFactory factory = new ConnectionFactory();
-    factory.setHost("localhost");
-    Connection connection = factory.newConnection();
-    Channel channel = connection.createChannel();
+    Channel channel = new BaseRabbitMq().getChannelInstance();
 
     //exchange 设置方式为 topic
     channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);

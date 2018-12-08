@@ -1,8 +1,7 @@
 package com.hk.publishAndSubscribe;
 
+import com.hk.BaseRabbitMq;
 import com.rabbitmq.client.BuiltinExchangeType;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
 
 public class EmitLog {
@@ -10,10 +9,7 @@ public class EmitLog {
     private static final String EXCHANGE_NAME = "logs";
 
     public static void main(String[] argv) throws Exception {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-        Connection connection = factory.newConnection();
-        Channel channel = connection.createChannel();
+        Channel channel = new BaseRabbitMq().getChannelInstance();
 
         //声明一个exchange
         channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.FANOUT);
@@ -28,7 +24,6 @@ public class EmitLog {
 
 
         channel.close();
-        connection.close();
     }
 
     private static String getMessage(String[] strings) {

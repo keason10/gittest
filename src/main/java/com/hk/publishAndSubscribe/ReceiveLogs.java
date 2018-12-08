@@ -1,5 +1,6 @@
 package com.hk.publishAndSubscribe;
 
+import com.hk.BaseRabbitMq;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
@@ -8,10 +9,7 @@ public class ReceiveLogs {
     private static final String EXCHANGE_NAME = "logs";
 
     public static void main(String[] argv) throws Exception {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-        Connection connection = factory.newConnection();
-        Channel channel = connection.createChannel();
+        Channel channel = new BaseRabbitMq().getChannelInstance();
 
         //声明exchange
         channel.exchangeDeclare(EXCHANGE_NAME, "fanout");

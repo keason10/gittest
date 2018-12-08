@@ -1,8 +1,7 @@
 package com.hk.Routing;
 
+import com.hk.BaseRabbitMq;
 import com.rabbitmq.client.BuiltinExchangeType;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
 
 public class EmitLogDirect {
@@ -11,10 +10,7 @@ public class EmitLogDirect {
 
     public static void main(String[] argv) throws Exception {
 
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-        Connection connection = factory.newConnection();
-        Channel channel = connection.createChannel();
+        Channel channel = new BaseRabbitMq().getChannelInstance();
 
         //exchange 设置方式为 direct
         channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
@@ -27,7 +23,6 @@ public class EmitLogDirect {
         System.out.println(" [x] Sent '" + severity + "':'" + message + "'");
 
         channel.close();
-        connection.close();
     }
 
     private static String getSeverity(String[] strings) {

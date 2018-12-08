@@ -16,19 +16,22 @@ import java.util.concurrent.TimeoutException;
  * @date: 2018/11/5 15:54
  */
 public class BaseRabbitMq {
-    Logger logger = LoggerFactory.getLogger(this.getClass());
-    public Channel init()  {
+    private static  Channel channel = null;
+    private static Logger logger = LoggerFactory.getLogger(BaseRabbitMq.class);
+    static {
         try {
             ConnectionFactory factory = new ConnectionFactory();
             factory.setHost("localhost");
             Connection connection = factory.newConnection();
-            Channel channel = connection.createChannel();
-            return channel;
+            channel = connection.createChannel();
         } catch (IOException e) {
             logger.error("BaseRabbitMq init exception", e);
         } catch (TimeoutException e) {
             logger.error("BaseRabbitMq init exception", e);
         }
-        return null;
+    }
+
+    public Channel getChannelInstance() {
+        return channel;
     }
 }
